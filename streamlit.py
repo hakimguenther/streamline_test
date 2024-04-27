@@ -102,7 +102,7 @@ try:
 
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
             render(env,model.q_table)
-            st.pyplot(fig)
+            placeholder.pyplot(fig)
         
             #env.render(model.q_table)
             
