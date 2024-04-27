@@ -28,7 +28,7 @@ st.markdown("Feel free to tag or message me on the [Pygame-CE Discord](https://d
 
 status = st.container()
 col1, col2 = st.columns(2)
-
+placeholder = st.empty()
 
 
 try:
@@ -53,7 +53,7 @@ try:
         done = False
         n_steps = 0
         while not done:
-            col2.empty()
+            placeholder.empty()
             n_steps += 1
 
             current_state = obs
@@ -65,9 +65,9 @@ try:
 
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
             env.render(model.q_table)
-            with col2:
-                img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
-                st.image(img)
+            
+            img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
+            placeholder.image(img)
 except Exception as e:
     status.error(f"{type(e).__name__}: {e}")
 
