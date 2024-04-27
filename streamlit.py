@@ -90,7 +90,7 @@ try:
         done = False
         n_steps = 0
         while not done:
-            placeholder.empty()
+            #placeholder.empty()
             n_steps += 1
 
             current_state = obs
