@@ -101,14 +101,14 @@ try:
             reward_cum += reward
 
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
-            render(env,model.q_table)
-            placeholder.pyplot(fig)
+            #render(env,model.q_table)
+            #placeholder.pyplot(fig)
         
-            #env.render(model.q_table)
+            env.render(model.q_table)
             
             
-            #img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
-            #placeholder.image(img)
+            img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
+            placeholder.image(img)
             time.sleep(.1)
 except Exception as e:
     status.error(f"{type(e).__name__}: {e}")
