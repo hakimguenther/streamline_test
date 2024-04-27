@@ -214,5 +214,5 @@ class MazeGameEnv(gym.Env):
         pygame.display.update()  # Refresh the display
         SCREEN_SIZE = (self.resolution_x,self.resolution_y)
         SCREEN = pygame.Surface(SCREEN_SIZE, pygame.SRCALPHA)
-        self.buffer = pygame.image.tobytes(SCREEN, 'RGB')
+        self.buffer = pygame.surfarray.pixels3d(self.screen).swapaxes(0, 1)
         #self.video.update(pygame.surfarray.pixels3d(self.screen).swapaxes(0, 1), inverted=True) # THIS LINE
