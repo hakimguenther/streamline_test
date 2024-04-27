@@ -61,7 +61,7 @@ def render(env, q_table=None):
             if (row, col) == tuple(env.current_pos):
                 ax.plot(x, y, 'o', color='gray')
 
-    plt.pause(0.001)  # Pause to update the plot
+    plt.pause(0.5)  # Pause to update the plot
 
 
 st.title("RL Simulator")
