@@ -5,3 +5,4 @@ streamlit_ace==0.1.1
 streamlit==1.31.1
 gym
 vidmaker
+cv2
