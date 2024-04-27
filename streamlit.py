@@ -59,7 +59,7 @@ try:
             
             img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
             placeholder.image(img)
-            time.sleep(.7)
+            time.sleep(1)
 except Exception as e:
     status.error(f"{type(e).__name__}: {e}")
 
