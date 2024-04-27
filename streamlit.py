@@ -5,7 +5,6 @@ from PIL import Image
 import gym
 from gym import spaces
 import numpy as np
-import pygame
 import sys
 
 from models import Q_Learning, Sarsa, Q_Learning_Adaptive_Exploration, Q_Learning_Eligibility_Traces
@@ -30,12 +29,6 @@ st.markdown("Feel free to tag or message me on the [Pygame-CE Discord](https://d
 status = st.container()
 col1, col2 = st.columns(2)
 
-pygame.init()
-pygame.font.init()
-
-SCREEN_SIZE = (800, 600)
-SCREEN = pygame.Surface(SCREEN_SIZE, pygame.SRCALPHA)
-SCREEN.fill((0, 0, 0))
 
 
 try:
