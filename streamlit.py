@@ -101,8 +101,9 @@ try:
             reward_cum += reward
 
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
-            render(model.q_table)
+            render(env,model.q_table)
             st.pyplot(fig)
+        
             #env.render(model.q_table)
             
             
