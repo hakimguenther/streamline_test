@@ -65,6 +65,7 @@ try:
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
             env.render(model.q_table)
             with col2:
+                col2.empty()
                 img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
                 st.image(img)
 except Exception as e:
