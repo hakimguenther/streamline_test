@@ -6,3 +6,4 @@ streamlit==1.31.1
 gym
 vidmaker
 opencv-python
+matplotlib
