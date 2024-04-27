@@ -2,7 +2,7 @@ import gym
 from gym import spaces
 import numpy as np
 import pygame
-import vidmaker
+#import vidmaker
 import os
 import random
 
@@ -40,7 +40,7 @@ class MazeGameEnv(gym.Env):
 
         #video settings
         video_path = os.path.join(video_folder_path, video_filename)
-        self.video = vidmaker.Video(path=video_path, fps=60, resolution=(resolution_x, resolution_y))
+        #self.video = vidmaker.Video(path=video_path, fps=60, resolution=(resolution_x, resolution_y))
     
     def init_maze2(self):
         height, width = self.size
@@ -212,4 +212,4 @@ class MazeGameEnv(gym.Env):
                     pygame.draw.circle(self.screen, agent_color, (center_x, center_y), int(self.cell_size * 0.2))
                 
         pygame.display.update()  # Refresh the display
-        self.video.update(pygame.surfarray.pixels3d(self.screen).swapaxes(0, 1), inverted=True) # THIS LINE
+        #self.video.update(pygame.surfarray.pixels3d(self.screen).swapaxes(0, 1), inverted=True) # THIS LINE
