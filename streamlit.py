@@ -6,6 +6,7 @@ import gym
 from gym import spaces
 import numpy as np
 import sys
+import time
 
 from models import Q_Learning, Sarsa, Q_Learning_Adaptive_Exploration, Q_Learning_Eligibility_Traces
 from mazegame import MazeGameEnv
@@ -68,6 +69,7 @@ try:
             
             img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
             placeholder.image(img)
+            time.sleep(1)
 except Exception as e:
     status.error(f"{type(e).__name__}: {e}")
 
