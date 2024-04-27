@@ -52,9 +52,9 @@ try:
     for rollout in range(n_rollouts):
         obs, info = env.reset()
 
-        print("=============================================================================")
-        print(f"Rollout {rollout}")
-        print("-----------------------------------------------------------------------------")
+        #print("=============================================================================")
+        #print(f"Rollout {rollout}")
+        #print("-----------------------------------------------------------------------------")
 
         reward_cum = 0
         done = False
@@ -71,7 +71,7 @@ try:
 
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
             with col2:
-                img = Image.frombytes('RGB', SCREEN_SIZE, pygame.image.tobytes(SCREEN, 'RGB'))
+                img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
                 st.image(img)
 except Exception as e:
     status.error(f"{type(e).__name__}: {e}")

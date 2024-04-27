@@ -22,7 +22,7 @@ class MazeGameEnv(gym.Env):
         self.num_rows, self.num_cols = self.maze.shape
         self.max_timesteps = 200
         self.current_timestep = 0
-
+        self.buffer = None
         # 4 possible actions: 0=up, 1=down, 2=left, 3=right
         self.action_space = spaces.Discrete(6)  
 
@@ -34,9 +34,9 @@ class MazeGameEnv(gym.Env):
         self.cell_size = 100
 
         # setting display size
-        resolution_x = int(self.num_cols * self.cell_size * 1.05)
-        resolution_y = int(self.num_rows * self.cell_size * 0.9)
-        self.screen = pygame.display.set_mode((resolution_x, resolution_y))
+        self.resolution_x = int(self.num_cols * self.cell_size * 1.05)
+        self.resolution_y = int(self.num_rows * self.cell_size * 0.9)
+        self.screen = pygame.display.set_mode((self.resolution_x, self.resolution_y))
 
         #video settings
         video_path = os.path.join(video_folder_path, video_filename)
@@ -212,4 +212,7 @@ class MazeGameEnv(gym.Env):
                     pygame.draw.circle(self.screen, agent_color, (center_x, center_y), int(self.cell_size * 0.2))
                 
         pygame.display.update()  # Refresh the display
+        SCREEN_SIZE = (self.resolution_x,self.resolution_y)
+        SCREEN = pygame.Surface(SCREEN_SIZE, pygame.SRCALPHA)
+        self.buffer = pygame.image.tobytes(SCREEN, 'RGB')
         #self.video.update(pygame.surfarray.pixels3d(self.screen).swapaxes(0, 1), inverted=True) # THIS LINE
