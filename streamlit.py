@@ -130,7 +130,9 @@ try:
             
             #img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
             #placeholder.image(img)
-            time.sleep(.01)
+            speed = 0.010
+            print(speed)
+            time.sleep(speed)
 except Exception as e:
     status.error(f"{type(e).__name__}: {e}")
 
