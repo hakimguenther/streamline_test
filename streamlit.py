@@ -123,7 +123,7 @@ try:
 
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
             render(env,model.q_table)
-            placeholder2 = st.text(rollout,"    ",n_steps)
+            placeholder2 = st.text(str(rollout) + "    " + str(n_steps))
             placeholder.pyplot(fig)
         
             #env.render(model.q_table)
