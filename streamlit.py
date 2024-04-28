@@ -84,7 +84,7 @@ def render(env, q_table=None):
 
     #plt.pause(0.5)  # Pause to update the plot
 
-speed = 0.01
+speed = 0.001
 st.title("RL Simulator")
 st.text(speed)
 status = st.container()
