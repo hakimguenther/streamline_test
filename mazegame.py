@@ -5,6 +5,7 @@ import pygame
 #import vidmaker
 import os
 import random
+import matplotlib.pyplot as plt
 
 dirname = os.path.dirname(__file__)
 parent_dirname = os.path.dirname(dirname)
@@ -216,3 +217,15 @@ class MazeGameEnv(gym.Env):
         SCREEN = pygame.Surface(SCREEN_SIZE, pygame.SRCALPHA)
         self.buffer = pygame.surfarray.pixels3d(self.screen).swapaxes(0, 1).copy(order='C')
         #self.video.update(pygame.surfarray.pixels3d(self.screen).swapaxes(0, 1), inverted=True) # THIS LINE
+
+        
+
+    def render2(self, mode='human'):
+        fig, ax = plt.subplots()
+        ax.imshow(self.maze, cmap='hot')  # Color code the elements
+        ax.scatter(*self.current_pos[::-1], color='blue')  # Show agent's position
+        # Add more details based on your state representation
+        plt.grid(False)
+        plt.close(fig)
+        return fig
+
