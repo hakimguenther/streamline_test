@@ -84,9 +84,9 @@ def render(env, q_table=None):
 
     #plt.pause(0.5)  # Pause to update the plot
 
-
+speed = 0.01
 st.title("RL Simulator")
-
+st.text(speed)
 status = st.container()
 placeholder = st.empty()
 
@@ -130,8 +130,7 @@ try:
             
             #img = Image.frombytes('RGB', (env.resolution_x,env.resolution_y), env.buffer)
             #placeholder.image(img)
-            speed = 0.010
-            print(speed)
+            
             time.sleep(speed)
 except Exception as e:
     status.error(f"{type(e).__name__}: {e}")
