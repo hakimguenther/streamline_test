@@ -18,20 +18,33 @@ st.set_page_config(
     page_title="RL"
 )
 fig, ax = plt.subplots()
-def draw_hexagon(center, radius, color='white'):
-        """Draws a hexagon given the center, radius, and color."""
-        for angle in range(0, 360, 60):
-            x = center[0] + radius * np.cos(np.radians(angle))
-            y = center[1] + radius * np.sin(np.radians(angle))
-            hexagon = patches.RegularPolygon((x, y), numVertices=6, radius=radius, orientation=np.radians(30),
-                                             color=color, ec='black')
-            ax.add_patch(hexagon)
-            return hexagon
+
+from matplotlib.patches import RegularPolygon, Arrow
+
+def draw_hexagon(ax, center, radius, color='white', edgecolor='black'):
+    """Draws a hexagon given the center, radius, and color."""
+    hexagon = RegularPolygon(center, numVertices=6, radius=radius, orientation=np.pi/6,
+                             facecolor=color, edgecolor=edgecolor)
+    ax.add_patch(hexagon)
+
+def draw_arrow(ax, center, radius, direction, color='blue'):
+    """Draws an arrow within a hexagon based on the direction."""
+    directions = {
+        0: np.pi/3,   # NE
+        1: 0,          # E
+        2: -np.pi/3,   # SE
+        3: -2*np.pi/3, # SW
+        4: np.pi,      # W
+        5: 2*np.pi/3   # NW
+    }
+    angle = directions[direction]
+    end = (center[0] + radius * 0.5 * np.cos(angle), center[1] + radius * 0.5 * np.sin(angle))
+    ax.add_patch(Arrow(center[0], center[1], end[0] - center[0], end[1] - center[1], width=0.1, color=color))
 
 def render(env, q_table=None):
     ax.clear()  # Clear previous drawings
     ax.set_aspect('equal')
-    ax.axis('off')  # Turn off the axis
+    ax.axis('off')  # Hide axes
 
     radius = 1  # Radius of the hexagons
     row_height = 1.5 * radius
@@ -55,11 +68,19 @@ def render(env, q_table=None):
             elif cell == 'L':
                 color = 'red'  # Loss
 
-            hexagon = draw_hexagon((x, y), radius, color)
+            draw_hexagon(ax, (x, y), radius, color=color)
+
+            # Visualize Q-table with arrows
+            if q_table is not None:
+                best_action = np.argmax(q_table[row, col])
+                worst_action = np.argmin(q_table[row, col])
+                draw_arrow(ax, (x, y), radius, best_action, color='blue')
+                draw_arrow(ax, (x, y), radius, worst_action, color='red')
 
             # Visualize the agent
             if (row, col) == tuple(env.current_pos):
-                ax.plot(x, y, 'o', color='gray')
+                ax.plot(x, y, 'o', markersize=10, color='gray')  # Agent's position
+
 
     #plt.pause(0.5)  # Pause to update the plot
 
@@ -102,7 +123,7 @@ try:
 
             model.update(prev_state=current_state, action=action, reward=reward, next_state=next_state, done=done)
             render(env,model.q_table)
-            placeholder.pyplot(env.render2())
+            placeholder.pyplot(fig)
         
             #env.render(model.q_table)
             
